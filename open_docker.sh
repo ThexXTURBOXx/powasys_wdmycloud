@@ -1,0 +1,1 @@
+docker run -it -v $(pwd):/wdpksrc wdpk /bin/bash

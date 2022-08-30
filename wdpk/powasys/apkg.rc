@@ -1,0 +1,18 @@
+Package:	powasys
+Section:	Addon
+Version:	1.0
+Packager:	Nico Mexis
+Email:		nico.mexis@kabelmail.de
+Homepage:	https://nmexis.me/
+Description:      An open source frontend for the PowaSys software to show data about Kaco Powadors.
+Icon:	powasys.png
+AddonShowName:	PowaSys
+AddonIndexPage:	index.php
+AddonUsedPort:	80
+InstDepend:
+InstConflict:
+StartDepend:
+StartConflict:
+MinFWVer: 5.02.118
+MaxFWVer:
+IndividualFlag: 0
