@@ -10,7 +10,7 @@ function getLast24hStmt($connection, $truncate): mysqli_stmt
     return mysqli_prepare($connection,
         'SELECT * FROM entries WHERE time > DATE_SUB(NOW(), INTERVAL 24 HOUR) '
         . ($truncate ? 'GROUP BY powadorId, DATE(time), HOUR(time), MINUTE(time) DIV ? ' : '')
-        . 'ORDER BY time;');
+        . 'ORDER BY time,powadorId;');
 }
 
 function getLatestStatement($connection): mysqli_stmt
@@ -40,6 +40,14 @@ function max24hStatement($connection): mysqli_stmt
        MAX(temperature) AS temperature FROM entries 
                                        WHERE time > DATE_SUB(NOW(), INTERVAL 24 HOUR) 
                                        GROUP BY powadorId;');
+}
+
+function getIntervalStmt($connection, $truncate): mysqli_stmt
+{
+    return mysqli_prepare($connection,
+        'SELECT * FROM entries WHERE time >= ? AND time <= ? '
+        . ($truncate ? 'GROUP BY powadorId, DATE(time), HOUR(time), MINUTE(time) DIV ? ' : '')
+        . 'ORDER BY time,powadorId;');
 }
 
 function insertStmt($connection): mysqli_stmt
