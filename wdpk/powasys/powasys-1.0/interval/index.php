@@ -21,12 +21,17 @@ if ($truncate) {
 mysqli_stmt_execute($stmt) or die("Error when selecting: " . mysqli_error($connection));
 $result = mysqli_stmt_get_result($stmt);
 
-$data = array();
-while ($row = mysqli_fetch_assoc($result)) {
-    $data[] = $row;
-}
-
 // Echo everything
-echo json_encode($data);
+echo "[";
+$first = true;
+while ($row = mysqli_fetch_assoc($result)) {
+	if ($first) {
+		$first = false;
+	} else {
+		echo ",";
+	}
+    echo json_encode($row);
+}
+echo "]";
 
 mysqli_close($connection);
